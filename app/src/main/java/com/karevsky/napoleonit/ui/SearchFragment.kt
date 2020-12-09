@@ -1,23 +1,23 @@
 package com.karevsky.napoleonit.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import com.karevsky.napoleonit.R
+import com.karevsky.napoleonit.databinding.ActivityMainBinding
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 //TODO: Create Search fragment
 class SearchFragment : Fragment(R.layout.fragment_search) {
-    private var param1: String? = null
-    private var param2: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 
     companion object {
