@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -18,23 +19,35 @@
             android:id="@+id/tvAlbumName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="Album name"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            tools:text="Album name" />
 
         <TextView
             android:id="@+id/tvBandName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="Band name"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            tools:text="Band name" />
 
         <TextView
             android:id="@+id/tvTracksAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="Songs Amount: 20"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            tools:text="Songs Amount: 20" />
+
+        <Button
+            android:id="@+id/btnToSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Поиск"/>
+
+        <Button
+            android:id="@+id/btnToMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Назад"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
