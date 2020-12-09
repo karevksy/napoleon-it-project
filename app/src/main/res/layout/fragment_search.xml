@@ -6,35 +6,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.SearchFragment">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/tvSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="sans-serif-medium"
+        android:text="Поиск"
+        android:textSize="33sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_margin="10sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:gravity="center_horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="*поиск*"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
-
-        <Button
-            android:id="@+id/btnToDesc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="К описанию" />
-
-        <Button
-            android:id="@+id/btnToMain"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="На главный экран" />
-    </LinearLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

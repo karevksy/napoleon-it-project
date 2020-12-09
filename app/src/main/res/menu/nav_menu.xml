@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menuItemTop"
+        android:title="Топ"
+        android:icon="@drawable/ic_menu_top"/>
+
+    <item
+        android:id="@+id/menuItemFav"
+        android:icon="@drawable/ic_menu_fav"
+        android:title="Избранное" />
+
+    <item
+        android:id="@+id/menuItemSearch"
+        android:title="Поиск"
+        android:icon="@drawable/ic_menu_search"/>
+</menu>

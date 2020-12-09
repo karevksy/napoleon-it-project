@@ -6,68 +6,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.TopAlbumsFragment">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/tvTopArtists"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="sans-serif-medium"
+        android:text="Топ артистов"
+        android:textSize="33sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_margin="10sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/tvAlbumName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Введите название альбома: "
-            android:textSize="18sp" />
-
-        <EditText
-            android:id="@+id/etAlbumEnter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:inputType="text"
-            android:hint="Название альбома" />
-
-        <TextView
-            android:id="@+id/tvBandName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Введите группу: "
-            android:textSize="18sp" />
-
-        <EditText
-            android:id="@+id/etBandEnter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:inputType="text"
-            android:hint="Группа" />
-
-        <TextView
-            android:id="@+id/tvTracksAmount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Введите кол-во треков"
-            android:textSize="18sp" />
-
-        <EditText
-            android:id="@+id/etTracksEnter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:inputType="text"
-            android:hint="Кол-во треков" />
-
-        <Button
-            android:id="@+id/btnAdd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Добавить" />
-        <Button
-            android:id="@+id/btnToSearch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Перейти к поиску" />
-    </LinearLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

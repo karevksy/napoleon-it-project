@@ -7,6 +7,7 @@ import com.karevsky.napoleonit.R
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
+//TODO: Create Search fragment
 class SearchFragment : Fragment(R.layout.fragment_search) {
     private var param1: String? = null
     private var param2: String? = null

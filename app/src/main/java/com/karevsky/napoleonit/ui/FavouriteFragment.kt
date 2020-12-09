@@ -7,7 +7,8 @@ import com.karevsky.napoleonit.R
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class DescriptionFragment : Fragment(R.layout.fragment_description) {
+//TODO: Create Favorite fragment
+class FavouriteFragment : Fragment(R.layout.fragment_favourite) {
     private var param1: String? = null
     private var param2: String? = null
 
@@ -21,7 +22,7 @@ class DescriptionFragment : Fragment(R.layout.fragment_description) {
 
     companion object {
         fun newInstance(param1: String, param2: String) =
-            DescriptionFragment().apply {
+            FavouriteFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
