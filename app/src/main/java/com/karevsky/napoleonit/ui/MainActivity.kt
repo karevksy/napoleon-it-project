@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
 
         //disable dark theme
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-
         val fragmentManager = supportFragmentManager
         if (savedInstanceState == null){
             fragmentManager.beginTransaction()

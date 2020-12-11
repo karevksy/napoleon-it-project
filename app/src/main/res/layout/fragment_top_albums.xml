@@ -33,33 +33,46 @@
             android:layout_height="wrap_content"
             android:layout_margin="10sp">
 
+            <ImageView
+                android:id="@+id/testImg"
+                android:src="@mipmap/album_test"
+                android:layout_width="70sp"
+                android:layout_height="70sp"
+                android:layout_marginRight="10sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
             <TextView
                 android:id="@+id/tvAlbumName"
+                android:layout_marginLeft="10sp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:fontFamily="sans-serif-medium"
                 android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/testImg"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Assume Form" />
+                android:text="Assume Form" />
 
             <TextView
                 android:id="@+id/tvArtistName"
+                android:layout_marginLeft="10sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-medium"
+                android:text="James Blake"
                 android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvAlbumName"
-                tools:text="James Blake" />
+                app:layout_constraintLeft_toRightOf="@id/testImg"
+                app:layout_constraintStart_toEndOf="@+id/testImg"
+                app:layout_constraintTop_toBottomOf="@id/tvAlbumName" />
 
             <TextView
+                android:layout_marginLeft="10sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="13 треков"
                 android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvArtistName"
-                tools:text="13 треков" />
+                app:layout_constraintStart_toEndOf="@+id/testImg"
+                app:layout_constraintTop_toBottomOf="@id/tvArtistName" />
 
             <ImageView
                 android:id="@+id/ivSetFav"
