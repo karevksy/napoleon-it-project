@@ -3,6 +3,7 @@ package com.karevsky.napoleonit.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.fragment.app.FragmentTransaction
 
 import com.karevsky.napoleonit.R
 import com.karevsky.napoleonit.databinding.ActivityMainBinding
@@ -32,18 +33,21 @@ class MainActivity : AppCompatActivity() {
                 R.id.menuItemTop ->{
                     fragmentManager.beginTransaction()
                             .replace(R.id.container, TopAlbumsFragment())
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                             .commit()
                     true
                 }
                 R.id.menuItemFav ->{
                     fragmentManager.beginTransaction()
                             .replace(R.id.container, FavouriteFragment())
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                             .commit()
                     true
                 }
                 R.id.menuItemSearch ->{
                     fragmentManager.beginTransaction()
                             .replace(R.id.container, SearchFragment())
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                             .commit()
                     true
                 }
@@ -58,6 +62,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.menuItemSearch -> {}
             }
         }
+
+
     }
 }
 
