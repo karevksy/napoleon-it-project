@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction
 
 import com.karevsky.napoleonit.R
 import com.karevsky.napoleonit.databinding.ActivityMainBinding
+import com.karevsky.napoleonit.feature.search.SearchFragment
 
 class MainActivity : AppCompatActivity() {
 
