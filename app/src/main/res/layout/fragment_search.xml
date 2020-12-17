@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.SearchFragment">
+    tools:context=".feature.search.SearchFragment">
 
     <TextView
         android:id="@+id/tvSearch"
@@ -18,5 +18,43 @@
         android:layout_margin="10sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etYearFrom"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:hint="С какого года"
+        app:layout_constraintTop_toBottomOf="@id/tvSearch"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="10dp"/>
+
+    <EditText
+        android:id="@+id/etYearTo"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:hint="По какой год"
+        app:layout_constraintTop_toBottomOf="@id/etYearFrom"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"/>
+
+    <Spinner
+        android:id="@+id/genreSpinner"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/etYearTo"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"/>
+
+    <Button
+        android:id="@+id/btnSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/genreSpinner"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Поиск"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
