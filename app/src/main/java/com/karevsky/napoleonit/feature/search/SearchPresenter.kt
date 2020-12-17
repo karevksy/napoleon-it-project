@@ -1,12 +1,12 @@
 package com.karevsky.napoleonit.feature.search
 
-import java.lang.Exception
 import java.lang.NumberFormatException
-
 
 class SearchPresenter(private val view : SearchView){
 
-    var selectedGenre = GENRES.ALL
+    var yearBeg : Int? = 1950
+    var yearEnd : Int? = 2020
+    var selectedGenre :GENRES = GENRES.ALL
 
     fun validate(yearFrom: String, yearTo: String) {
         when{
@@ -14,21 +14,21 @@ class SearchPresenter(private val view : SearchView){
         }
     }
 
-    fun getGenre(genre: GENRES) {
-        this.selectedGenre = genre
-    }
+    fun setGenre(genre: GENRES) {
+            this.selectedGenre = genre
+            view.showGenre(selectedGenre)
+        }
 
     private fun yearIsCorrect(yearFrom: String, yearTo: String) : Boolean{
         if (yearFrom.isEmpty() || yearTo.isEmpty()) return false
 
-        return  try {
-            val begYear = yearFrom.toInt()
-            val endYear = yearTo.toInt()
-            begYear in 1950..2020
-            endYear in 1950..2020
-            begYear < endYear
+        return try {
+            this.yearBeg = yearFrom.toInt()
+            this.yearEnd = yearTo.toInt()
+            yearBeg in 1950..2020  && yearEnd in 1950..2020 && yearBeg!! < yearEnd!!
         } catch (e: NumberFormatException){
             false
         }
     }
+
 }

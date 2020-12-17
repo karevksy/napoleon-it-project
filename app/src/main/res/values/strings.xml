@@ -2,6 +2,7 @@
     <string name="app_name">NapoleonIT</string>
 
     <string-array name="genres_array">
+        <item>Все</item>
         <item>Рок</item>
         <item>Инди</item>
         <item>Хип-хоп</item>
