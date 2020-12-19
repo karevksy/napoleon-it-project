@@ -1,4 +1,4 @@
-package com.karevsky.napoleonit.feature.search
+package com.karevsky.napoleonit.feature.search.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,13 +10,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.karevsky.napoleonit.R
 import com.karevsky.napoleonit.databinding.FragmentSearchBinding
+import com.karevsky.napoleonit.feature.search.presenter.GENRES
+import com.karevsky.napoleonit.feature.search.presenter.SearchPresenter
+import com.karevsky.napoleonit.feature.search.presenter.SearchView
 
-enum class GENRES {ALL, ROCK, INDIE, HIP_HOP, ALTERNATIVE, POST_HC, ELECTRONIC, TECHNO}
-
-class SearchFragment : Fragment(R.layout.fragment_search), SearchView{
+class SearchFragment : Fragment(), SearchView {
 
     private lateinit var bind : FragmentSearchBinding
-    private val genres = GENRES.values()
     private val presenter = SearchPresenter(this)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?)
@@ -43,27 +43,21 @@ class SearchFragment : Fragment(R.layout.fragment_search), SearchView{
     private fun initListeners() {
         bind.btnSearch.setOnClickListener {
             presenter.validate(
-                    bind.etYearFrom.text.toString(),
-                    bind.etYearTo.text.toString()
+                bind.etYearFrom.text.toString(),
+                bind.etYearTo.text.toString()
             )
         }
 
         bind.genreSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent:AdapterView<*>, view: View, position: Int, id: Long){
-                for (genre in genres){
-                    if(genre.ordinal == position) {
-                        presenter.setGenre(genre)
-                        break
-                        }
-                    }
-                }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
+            override fun onItemSelected(parent:AdapterView<*>, view: View, position: Int, id: Long) {
+                presenter.setGenre(position)
             }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) { }
         }
 
     }
+
 
     override fun showYearError() {
         Toast.makeText(requireContext(), "Неверно введен год.", Toast.LENGTH_SHORT).show()

@@ -1,13 +1,14 @@
-package com.karevsky.napoleonit.ui
+package com.karevsky.napoleonit
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.FragmentTransaction
 
-import com.karevsky.napoleonit.R
 import com.karevsky.napoleonit.databinding.ActivityMainBinding
-import com.karevsky.napoleonit.feature.search.SearchFragment
+import com.karevsky.napoleonit.feature.favorites.ui.FavouriteFragment
+import com.karevsky.napoleonit.feature.search.ui.SearchFragment
+import com.karevsky.napoleonit.feature.top.ui.TopAlbumsFragment
 
 class MainActivity : AppCompatActivity() {
 
