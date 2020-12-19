@@ -1,21 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.TopAlbumsFragment">
+    tools:context=".feature.topAlbums.ui.TopAlbumsFragment">
 
     <TextView
         android:id="@+id/tvTopArtists"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="10sp"
         android:fontFamily="sans-serif-medium"
         android:text="Топ альбомов"
+        android:textColor="@color/black"
         android:textSize="33sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_margin="10sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTopAlbums"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTopArtists" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="55dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

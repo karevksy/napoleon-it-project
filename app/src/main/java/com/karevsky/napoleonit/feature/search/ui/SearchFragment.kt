@@ -1,32 +1,22 @@
 package com.karevsky.napoleonit.feature.search.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import com.karevsky.napoleonit.R
-import com.karevsky.napoleonit.databinding.FragmentSearchBinding
 import com.karevsky.napoleonit.feature.search.presenter.GENRES
 import com.karevsky.napoleonit.feature.search.presenter.SearchPresenter
 import com.karevsky.napoleonit.feature.search.presenter.SearchView
+import kotlinx.android.synthetic.main.fragment_search.*
+import moxy.MvpAppCompatFragment
+import moxy.ktx.moxyPresenter
 
-class SearchFragment : Fragment(), SearchView {
+class SearchFragment : MvpAppCompatFragment(R.layout.fragment_search), SearchView {
 
-    private lateinit var bind: FragmentSearchBinding
-    private val presenter = SearchPresenter(this)
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    )
-            : View {
-        bind = FragmentSearchBinding.inflate(inflater)
-        return bind.root
+    private val presenter: SearchPresenter by moxyPresenter {
+        SearchPresenter()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,19 +30,19 @@ class SearchFragment : Fragment(), SearchView {
             android.R.layout.simple_spinner_item
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            bind.genreSpinner.adapter = adapter
+            genreSpinner.adapter = adapter
         }
     }
 
     private fun initListeners() {
-        bind.btnSearch.setOnClickListener {
+        btnSearch.setOnClickListener {
             presenter.validate(
-                bind.etYearFrom.text.toString(),
-                bind.etYearTo.text.toString()
+                etYearFrom.text.toString(),
+                etYearTo.text.toString()
             )
         }
 
-        bind.genreSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        genreSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
                 view: View,
