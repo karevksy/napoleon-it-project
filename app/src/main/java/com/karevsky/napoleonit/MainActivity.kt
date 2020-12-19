@@ -22,34 +22,34 @@ class MainActivity : AppCompatActivity() {
         //disable dark theme
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         val fragmentManager = supportFragmentManager
-        if (savedInstanceState == null){
+        if (savedInstanceState == null) {
             fragmentManager.beginTransaction()
-                    .add(R.id.container, TopAlbumsFragment())
-                    .commit()
+                .add(R.id.container, TopAlbumsFragment())
+                .commit()
         }
 
         //bottom navigation menu listener
         bind.userNav.setOnNavigationItemSelectedListener { item ->
-            when(item.itemId){
-                R.id.menuItemTop ->{
+            when (item.itemId) {
+                R.id.menuItemTop -> {
                     fragmentManager.beginTransaction()
-                            .replace(R.id.container, TopAlbumsFragment())
-                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                            .commit()
+                        .replace(R.id.container, TopAlbumsFragment())
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .commit()
                     true
                 }
-                R.id.menuItemFav ->{
+                R.id.menuItemFav -> {
                     fragmentManager.beginTransaction()
-                            .replace(R.id.container, FavouriteFragment())
-                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                            .commit()
+                        .replace(R.id.container, FavouriteFragment())
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .commit()
                     true
                 }
-                R.id.menuItemSearch ->{
+                R.id.menuItemSearch -> {
                     fragmentManager.beginTransaction()
-                            .replace(R.id.container, SearchFragment())
-                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                            .commit()
+                        .replace(R.id.container, SearchFragment())
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .commit()
                     true
                 }
                 else -> false
@@ -57,10 +57,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         bind.userNav.setOnNavigationItemReselectedListener { item ->
-            when(item.itemId){
-                R.id.menuItemTop -> {}
-                R.id.menuItemFav -> {}
-                R.id.menuItemSearch -> {}
+            when (item.itemId) {
+                R.id.menuItemTop -> {
+                }
+                R.id.menuItemFav -> {
+                }
+                R.id.menuItemSearch -> {
+                }
             }
         }
 

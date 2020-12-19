@@ -14,9 +14,13 @@ import com.karevsky.napoleonit.databinding.FragmentTopAlbumsBinding
 
 class TopAlbumsFragment : Fragment() {
 
-    private lateinit var bind : FragmentTopAlbumsBinding
+    private lateinit var bind: FragmentTopAlbumsBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    )
             : View {
         bind = FragmentTopAlbumsBinding.inflate(inflater)
         return bind.root

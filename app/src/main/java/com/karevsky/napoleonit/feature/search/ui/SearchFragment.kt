@@ -16,11 +16,15 @@ import com.karevsky.napoleonit.feature.search.presenter.SearchView
 
 class SearchFragment : Fragment(), SearchView {
 
-    private lateinit var bind : FragmentSearchBinding
+    private lateinit var bind: FragmentSearchBinding
     private val presenter = SearchPresenter(this)
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?)
-    : View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    )
+            : View {
         bind = FragmentSearchBinding.inflate(inflater)
         return bind.root
     }
@@ -31,9 +35,9 @@ class SearchFragment : Fragment(), SearchView {
         initListeners()
 
         ArrayAdapter.createFromResource(
-                requireContext(),
-                R.array.genres_array,
-                android.R.layout.simple_spinner_item
+            requireContext(),
+            R.array.genres_array,
+            android.R.layout.simple_spinner_item
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             bind.genreSpinner.adapter = adapter
@@ -49,13 +53,17 @@ class SearchFragment : Fragment(), SearchView {
         }
 
         bind.genreSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent:AdapterView<*>, view: View, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
                 presenter.setGenre(position)
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) { }
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
-
     }
 
 
