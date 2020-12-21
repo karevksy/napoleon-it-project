@@ -48,11 +48,9 @@ class SearchFragment : MvpAppCompatFragment(R.layout.fragment_search), SearchVie
                 view: View,
                 position: Int,
                 id: Long
-            ) {
-                presenter.setGenre(position)
-            }
+            ) = presenter.setGenre(position)
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onNothingSelected(parent: AdapterView<*>?) = presenter.setGenre(GENRES.ALL.ordinal)
         }
     }
 

@@ -2,16 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menuItemTop"
-        android:title="Топ"
+        android:title="@string/MenuTop"
         android:icon="@drawable/ic_menu_top"/>
 
     <item
         android:id="@+id/menuItemFav"
         android:icon="@drawable/ic_menu_fav"
-        android:title="Избранное" />
+        android:title="@string/MenuFav" />
 
     <item
         android:id="@+id/menuItemSearch"
-        android:title="Поиск"
+        android:title="@string/MenuSearch"
         android:icon="@drawable/ic_menu_search"/>
 </menu>

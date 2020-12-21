@@ -8,9 +8,7 @@ import kotlinx.android.synthetic.main.fragment_album_details.*
 class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
 
     companion object {
-
         private const val ALBUM = "ALBUM"
-
         fun newInstance(album: Album) =
             AlbumDetailsFragment().apply {
                 arguments = Bundle().apply {

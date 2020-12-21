@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         //set bindings
         val bind = ActivityMainBinding.inflate(layoutInflater)
         val view = bind.root
@@ -61,8 +62,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
-
     }
 }
 

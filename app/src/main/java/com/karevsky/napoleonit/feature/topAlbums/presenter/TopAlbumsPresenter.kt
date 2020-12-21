@@ -30,7 +30,6 @@ class TopAlbumsPresenter : MvpPresenter<TopAlbumsView>() {
     fun onAlbumClick(album: Album) {
         viewState.openAlbumDetail(album)
     }
-
 }
 
 interface TopAlbumsView : MvpView {
@@ -40,6 +39,4 @@ interface TopAlbumsView : MvpView {
 
     @StateStrategyType(OneExecutionStateStrategy::class)
     fun openAlbumDetail(album: Album)
-
-
 }
