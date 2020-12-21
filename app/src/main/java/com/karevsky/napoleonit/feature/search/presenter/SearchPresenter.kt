@@ -1,10 +1,13 @@
 package com.karevsky.napoleonit.feature.search.presenter
 
-import java.lang.NumberFormatException
+import moxy.MvpPresenter
+import moxy.MvpView
+import moxy.viewstate.strategy.SkipStrategy
+import moxy.viewstate.strategy.StateStrategyType
 
 enum class GENRES { ALL, ROCK, INDIE, HIP_HOP, ALTERNATIVE, POST_HC, ELECTRONIC, TECHNO }
 
-class SearchPresenter(private val view: SearchView) {
+class SearchPresenter : MvpPresenter<SearchView>() {
 
     var yearBeg: Int? = 1950
     var yearEnd: Int? = 2020
@@ -13,7 +16,7 @@ class SearchPresenter(private val view: SearchView) {
 
     fun validate(yearFrom: String, yearTo: String) {
         when {
-            !yearIsCorrect(yearFrom, yearTo) -> view.showYearError()
+            !yearIsCorrect(yearFrom, yearTo) -> viewState.showYearError()
         }
     }
 
@@ -21,7 +24,7 @@ class SearchPresenter(private val view: SearchView) {
         for (genre in genres) {
             if (genre.ordinal == position) {
                 selectedGenre = genre
-                view.showGenre(selectedGenre)
+                viewState.showGenre(selectedGenre)
                 break
             }
         }
@@ -41,9 +44,11 @@ class SearchPresenter(private val view: SearchView) {
 
 }
 
-interface SearchView {
+interface SearchView : MvpView {
 
+    @StateStrategyType(SkipStrategy::class)
     fun showYearError()
 
+    @StateStrategyType(SkipStrategy::class)
     fun showGenre(selectedGenre: GENRES)
 }

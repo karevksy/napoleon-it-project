@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">NapoleonIT</string>
 
+    <!--Test genres-->
     <string-array name="genres_array">
         <item>Все</item>
         <item>Рок</item>
@@ -11,4 +12,9 @@
         <item>Электроника</item>
         <item>Техно</item>
     </string-array>
+
+    <!--Menu Buttons -->
+    <string name="MenuTop">Топ</string>
+    <string name="MenuFav">Избранное</string>
+    <string name="MenuSearch">Поиск</string>
 </resources>
