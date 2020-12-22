@@ -9,17 +9,23 @@ enum class GENRES { ALL, ROCK, INDIE, HIP_HOP, ALTERNATIVE, POST_HC, ELECTRONIC,
 
 class SearchPresenter : MvpPresenter<SearchView>() {
 
-    var yearBeg: Int? = 1950
-    var yearEnd: Int? = 2020
+    private var yearBeg: Int? = 1950
+    private var yearEnd: Int? = 2020
     private val genres = GENRES.values()
-    var selectedGenre: GENRES = GENRES.ALL
+    private var selectedGenre: GENRES = GENRES.ALL
 
+    /**
+     * Выдает ошибку, если [yearFrom] и [yearTo] введен неверно
+     */
     fun validate(yearFrom: String, yearTo: String) {
         when {
             !yearIsCorrect(yearFrom, yearTo) -> viewState.showYearError()
         }
     }
 
+    /**
+     * Устанавливает [selectedGenre] в зависимости от [position]
+     */
     fun setGenre(position: Int) {
         for (genre in genres) {
             if (genre.ordinal == position) {
@@ -30,6 +36,9 @@ class SearchPresenter : MvpPresenter<SearchView>() {
         }
     }
 
+    /**
+     * @return False, если [yearFrom] и [yearTo] введён неверно, иначе True
+     */
     private fun yearIsCorrect(yearFrom: String, yearTo: String): Boolean {
         if (yearFrom.isEmpty() || yearTo.isEmpty()) return false
 

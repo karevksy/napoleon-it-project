@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         //disable dark theme
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
         val fragmentManager = supportFragmentManager
         if (savedInstanceState == null) {
             fragmentManager.beginTransaction()
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.menuItemTop -> {
                     fragmentManager.beginTransaction()
-                        .replace(R.id.container, TopAlbumsFragment())
+                        .replace(R.id.container, TopAlbumsFragment(), "TopAlbums")
                         .commit()
                     true
                 }
@@ -55,6 +56,12 @@ class MainActivity : AppCompatActivity() {
         bind.userNav.setOnNavigationItemReselectedListener { item ->
             when (item.itemId) {
                 R.id.menuItemTop -> {
+                    val topFragment = fragmentManager.findFragmentByTag("TopAlbums")
+                    if(topFragment != null && topFragment.isVisible) else {
+                        fragmentManager.beginTransaction()
+                            .replace(R.id.container, TopAlbumsFragment(), "TopAlbums")
+                            .commit()
+                    }
                 }
                 R.id.menuItemFav -> {
                 }
