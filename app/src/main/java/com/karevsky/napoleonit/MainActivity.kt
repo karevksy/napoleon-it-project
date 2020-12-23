@@ -56,8 +56,8 @@ class MainActivity : AppCompatActivity() {
         bind.userNav.setOnNavigationItemReselectedListener { item ->
             when (item.itemId) {
                 R.id.menuItemTop -> {
-                    val topFragment = fragmentManager.findFragmentByTag("TopAlbums")
-                    if(topFragment != null && topFragment.isVisible) else {
+                    val fragment = fragmentManager.findFragmentByTag("TopAlbums")
+                    if(fragment == null || !fragment.isVisible){
                         fragmentManager.beginTransaction()
                             .replace(R.id.container, TopAlbumsFragment(), "TopAlbums")
                             .commit()

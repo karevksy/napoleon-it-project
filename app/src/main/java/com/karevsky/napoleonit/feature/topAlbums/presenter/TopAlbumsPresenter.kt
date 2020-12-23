@@ -46,7 +46,7 @@ interface TopAlbumsView : MvpView {
     fun setAlbums(albums: List<Album>)
 
     /**
-     * Открывает детальное описание [album]
+     * Открывает фрагмент с описанием [album]
      */
     @StateStrategyType(OneExecutionStateStrategy::class)
     fun openAlbumDetail(album: Album)

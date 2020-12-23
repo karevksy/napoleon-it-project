@@ -52,12 +52,13 @@ class TopAlbumsFragment : MvpAppCompatFragment(R.layout.fragment_top_albums), To
     }
 
     override fun setAlbums(albums: List<Album>) {
-        albumsAdapter?.setData(albums)
+        albumsAdapter?.submitList(albums)
     }
 
     override fun openAlbumDetail(album: Album) {
         requireFragmentManager().beginTransaction()
             .replace(R.id.container, AlbumDetailsFragment.newInstance(album))
+            .addToBackStack("Details")
             .commit()
     }
 

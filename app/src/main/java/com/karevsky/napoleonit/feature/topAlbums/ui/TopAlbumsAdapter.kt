@@ -3,6 +3,8 @@ package com.karevsky.napoleonit.feature.topAlbums.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.karevsky.napoleonit.Album
 import com.karevsky.napoleonit.R
@@ -14,16 +16,14 @@ class TopAlbumsAdapter(
     private val onAlbumClick: (Album) -> Unit,
     private val onSetFavClick: (Album) -> Unit,
     private val favoriteDao: FavoriteDao
-) :
-    RecyclerView.Adapter<TopAlbumsAdapter.ViewHolder>() {
+) : ListAdapter<Album, TopAlbumsAdapter.ViewHolder>(object : DiffUtil.ItemCallback<Album>(){
+    override fun areItemsTheSame(oldItem: Album, newItem: Album): Boolean =
+        oldItem == newItem
 
-    private var albums: MutableList<Album> = mutableListOf()
+    override fun areContentsTheSame(oldItem: Album, newItem: Album): Boolean =
+        oldItem.name == newItem.name
+}) {
 
-    fun setData(albums: List<Album>) {
-        this.albums.clear()
-        this.albums.addAll(albums)
-        notifyDataSetChanged()
-    }
 
     class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
         LayoutContainer
@@ -35,27 +35,28 @@ class TopAlbumsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = albums[position]
+        val item = getItem(position)
 
-        holder.tvAlbumName.text = item.name
-        holder.tvArtistName.text = item.band
-        holder.tvSongAmount.text = "${item.tracks} треков"
-        setImg(item, holder)
+        holder.apply {
+            tvAlbumName.text = item.name
+            tvArtistName.text = item.band
+            tvSongAmount.text = "${item.tracks} треков"
+            setImg(item, this)
 
-        holder.containerView.setOnClickListener {
-            onAlbumClick(item)
+            containerView.setOnClickListener{
+                onAlbumClick(item)
+            }
+
+            imgSetFav.setOnClickListener {
+                onSetFavClick(item)
+                setImg(item, this)
+            }
         }
 
-        holder.imgSetFav.setOnClickListener {
-            onSetFavClick(item)
-            setImg(item, holder)
-        }
     }
 
-    override fun getItemCount(): Int = albums.size
-
     /**
-     * Устанавливает картинку [imgSetFav] в зависимости от того,
+     * Устанавливает картинку для [imgSetFav] в зависимости от того,
      * находится ли [item] в избранном
      */
     private fun setImg(item: Album, holder: ViewHolder) {

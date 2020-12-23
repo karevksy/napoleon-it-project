@@ -16,7 +16,7 @@ class AlbumDetailsFragment : MvpAppCompatFragment(R.layout.fragment_album_detail
 
     private val presenter: DetailPresenter by moxyPresenter {
         DetailPresenter(
-            arguments?.getParcelable<Album>(ALBUM)!!,
+            arguments?.getParcelable(ALBUM)!!,
             favoriteDao = FavoriteDaoImpl(
                 requireContext().getSharedPreferences(
                     "data",
@@ -50,6 +50,7 @@ class AlbumDetailsFragment : MvpAppCompatFragment(R.layout.fragment_album_detail
     }
 
     override fun setIsInFavorites(inFavorites: Boolean) {
-        if (inFavorites) imgDetailsSetFav.setImageResource(R.drawable.ic_fav_on) else imgDetailsSetFav.setImageResource(R.drawable.ic_fav_off)
+        if (inFavorites) imgDetailsSetFav.setImageResource(R.drawable.ic_fav_on)
+        else imgDetailsSetFav.setImageResource(R.drawable.ic_fav_off)
     }
 }

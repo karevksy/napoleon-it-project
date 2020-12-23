@@ -32,9 +32,15 @@ class DetailPresenter(
 
 interface DetailView : MvpView {
 
+    /**
+     * Устанавливает поля [album] фрагменту
+     */
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun setDetails(album: Album)
 
+    /**
+     * Устанавливает альбом [inFavorites]
+     */
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun setIsInFavorites(inFavorites: Boolean)
 

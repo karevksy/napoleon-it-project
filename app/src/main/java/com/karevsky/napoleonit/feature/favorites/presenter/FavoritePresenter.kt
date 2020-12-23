@@ -7,6 +7,7 @@ import com.karevsky.napoleonit.data.FavoriteDaoImpl
 import moxy.MvpPresenter
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
+import moxy.viewstate.strategy.OneExecutionStateStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 class FavoritePresenter(
@@ -26,18 +27,23 @@ class FavoritePresenter(
     }
 
     fun onRemoveClick(album: Album) {
-        viewState.removeAlbum(album)
+        favoriteDao.remove(album)
+        viewState.setAlbums()
     }
 }
 
 interface FavoriteView : MvpView {
+
+    /**
+     * Устанавливает альбомы, находящиеся в Shared Preferences
+     */
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun setAlbums()
 
-    @StateStrategyType(AddToEndSingleStrategy::class)
+    /**
+     * Открывает фрагмент с описанием [album]
+     */
+    @StateStrategyType(OneExecutionStateStrategy::class)
     fun openDetail(album: Album)
-
-    @StateStrategyType(AddToEndSingleStrategy::class)
-    fun removeAlbum(album: Album)
 
 }
