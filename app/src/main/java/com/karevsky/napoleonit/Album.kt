@@ -6,4 +6,4 @@ import kotlinx.serialization.Serializable
 
 @Parcelize
 @Serializable
-data class Album(val name: String, val band: String, val tracks: Int) : Parcelable
+data class Album(val id : Int, val name: String, val band: String, val imgSource: String) : Parcelable

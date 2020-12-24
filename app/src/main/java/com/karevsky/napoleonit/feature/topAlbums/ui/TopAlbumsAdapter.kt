@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.karevsky.napoleonit.Album
 import com.karevsky.napoleonit.R
 import com.karevsky.napoleonit.data.FavoriteDao
+import com.squareup.picasso.Picasso
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.album_item.*
 
@@ -18,7 +19,7 @@ class TopAlbumsAdapter(
     private val favoriteDao: FavoriteDao
 ) : ListAdapter<Album, TopAlbumsAdapter.ViewHolder>(object : DiffUtil.ItemCallback<Album>(){
     override fun areItemsTheSame(oldItem: Album, newItem: Album): Boolean =
-        oldItem == newItem
+        oldItem.id == newItem.id
 
     override fun areContentsTheSame(oldItem: Album, newItem: Album): Boolean =
         oldItem.name == newItem.name
@@ -40,8 +41,11 @@ class TopAlbumsAdapter(
         holder.apply {
             tvAlbumName.text = item.name
             tvArtistName.text = item.band
-            tvSongAmount.text = "${item.tracks} треков"
             setImg(item, this)
+
+            Picasso.get()
+                .load(item.imgSource)
+                .into(albumImg)
 
             containerView.setOnClickListener{
                 onAlbumClick(item)

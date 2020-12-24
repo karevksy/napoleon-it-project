@@ -46,7 +46,6 @@ class AlbumDetailsFragment : MvpAppCompatFragment(R.layout.fragment_album_detail
     override fun setDetails(album: Album) {
         tvDetailsAlbumName.text = album.name
         tvDetailsBandName.text = "Исполнитель: ${album.band}"
-        tvDetailsSongsAmount.text = "${album.tracks} треков"
     }
 
     override fun setIsInFavorites(inFavorites: Boolean) {
