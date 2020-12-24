@@ -6,28 +6,28 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.karevsky.napoleonit.domain.Album
 import com.karevsky.napoleonit.R
 import com.karevsky.napoleonit.data.FavoriteDaoImpl
-import com.karevsky.napoleonit.di.albumApi
-import com.karevsky.napoleonit.domain.GetTopAlbumsUseCase
+import com.karevsky.napoleonit.domain.Album
 import com.karevsky.napoleonit.feature.detail.ui.AlbumDetailsFragment
 import com.karevsky.napoleonit.feature.topAlbums.presenter.TopAlbumsPresenter
 import com.karevsky.napoleonit.feature.topAlbums.presenter.TopAlbumsView
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_top_albums.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class TopAlbumsFragment : MvpAppCompatFragment(R.layout.fragment_top_albums), TopAlbumsView {
 
-    private val presenter: TopAlbumsPresenter by moxyPresenter {
-        TopAlbumsPresenter(
-            getTopAlbumsUseCase = GetTopAlbumsUseCase(albumApi),
-            favoriteDao = FavoriteDaoImpl(
-                requireContext().getSharedPreferences("data", Context.MODE_PRIVATE)
-            )
-        )
-    }
+    @Inject
+    lateinit var topAlbumsPresenter: TopAlbumsPresenter
+
+    @Inject
+    lateinit var topAlbumsAdapterFactory: TopAlbumsAdapterFactory
+
+    private val presenter: TopAlbumsPresenter by moxyPresenter { topAlbumsPresenter }
     private var albumsAdapter: TopAlbumsAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,16 +35,13 @@ class TopAlbumsFragment : MvpAppCompatFragment(R.layout.fragment_top_albums), To
 
         with(rvTopAlbums) {
             layoutManager = LinearLayoutManager(context)
-            adapter = TopAlbumsAdapter(
+            adapter = topAlbumsAdapterFactory.create(
                 onAlbumClick = { album ->
                     presenter.onAlbumClick(album)
                 },
                 onSetFavClick = { album ->
                     presenter.onSetFavClick(album)
-                },
-                favoriteDao = FavoriteDaoImpl(
-                    requireContext().getSharedPreferences("data", Context.MODE_PRIVATE)
-                )
+                }
             ).also {
                 albumsAdapter = it
             }
@@ -61,7 +58,7 @@ class TopAlbumsFragment : MvpAppCompatFragment(R.layout.fragment_top_albums), To
     }
 
     override fun openAlbumDetail(album: Album) {
-        requireFragmentManager().beginTransaction()
+        parentFragmentManager.beginTransaction()
             .replace(R.id.container, AlbumDetailsFragment.newInstance(album))
             .addToBackStack("Details")
             .commit()

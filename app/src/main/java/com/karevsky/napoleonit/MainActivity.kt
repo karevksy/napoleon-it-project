@@ -7,7 +7,9 @@ import com.karevsky.napoleonit.databinding.ActivityMainBinding
 import com.karevsky.napoleonit.feature.favorites.ui.FavoriteFragment
 import com.karevsky.napoleonit.feature.search.ui.SearchFragment
 import com.karevsky.napoleonit.feature.topAlbums.ui.TopAlbumsFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

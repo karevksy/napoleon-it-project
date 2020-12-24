@@ -1,40 +1,28 @@
 package com.karevsky.napoleonit.feature.detail.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.karevsky.napoleonit.domain.Album
 import com.karevsky.napoleonit.R
-import com.karevsky.napoleonit.data.FavoriteDaoImpl
-import com.karevsky.napoleonit.di.albumApi
+import com.karevsky.napoleonit.domain.Album
 import com.karevsky.napoleonit.domain.AlbumDetails
-import com.karevsky.napoleonit.domain.GetAlbumByIdUseCase
+
 import com.karevsky.napoleonit.feature.detail.presenter.DetailPresenter
+import com.karevsky.napoleonit.feature.detail.presenter.DetailPresenterFactory
 import com.karevsky.napoleonit.feature.detail.presenter.DetailView
 import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_album_details.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class AlbumDetailsFragment : MvpAppCompatFragment(R.layout.fragment_album_details), DetailView {
 
-    private val presenter: DetailPresenter by moxyPresenter {
-        DetailPresenter(
-            album = arguments?.getParcelable(ALBUM)!!,
-            favoriteDao = FavoriteDaoImpl(
-                requireContext().getSharedPreferences(
-                    "data",
-                    Context.MODE_PRIVATE
-                )
-            ),
-            getAlbumByIdUseCase = GetAlbumByIdUseCase(
-                albumsApi = albumApi,
-                albumId = arguments?.getParcelable<Album>(ALBUM)!!.id
-            )
-        )
-    }
+    @Inject
+    lateinit var detailPresenterFactory: DetailPresenterFactory
 
     companion object {
         private const val ALBUM = "ALBUM"
@@ -44,6 +32,12 @@ class AlbumDetailsFragment : MvpAppCompatFragment(R.layout.fragment_album_detail
                     putParcelable(ALBUM, album)
                 }
             }
+    }
+
+    private val presenter: DetailPresenter by moxyPresenter {
+        detailPresenterFactory.create(
+            arguments?.getParcelable(ALBUM)!!
+        )
     }
 
     private var tracksAdapter: DetailTracksAdapter? = null

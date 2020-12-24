@@ -11,8 +11,9 @@ import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.OneExecutionStateStrategy
 import moxy.viewstate.strategy.SkipStrategy
 import moxy.viewstate.strategy.StateStrategyType
+import javax.inject.Inject
 
-class TopAlbumsPresenter(
+class TopAlbumsPresenter @Inject constructor(
     private val getTopAlbumsUseCase: GetTopAlbumsUseCase,
     private val favoriteDao: FavoriteDao
 ) : MvpPresenter<TopAlbumsView>() {

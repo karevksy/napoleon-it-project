@@ -12,6 +12,16 @@ import com.karevsky.napoleonit.domain.Album
 import com.squareup.picasso.Picasso
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.album_item.*
+import javax.inject.Inject
+
+class TopAlbumsAdapterFactory @Inject constructor(
+    private val favoriteDao: FavoriteDao
+) {
+    fun create(
+        onAlbumClick: (Album) -> Unit,
+        onSetFavClick: (Album) -> Unit
+    ) = TopAlbumsAdapter(onAlbumClick, onSetFavClick, favoriteDao)
+}
 
 class TopAlbumsAdapter(
     private val onAlbumClick: (Album) -> Unit,
