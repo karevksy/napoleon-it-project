@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.karevsky.napoleonit.Album
+import com.karevsky.napoleonit.domain.Album
 import com.karevsky.napoleonit.R
 import com.karevsky.napoleonit.data.FavoriteDaoImpl
 import com.karevsky.napoleonit.feature.detail.ui.AlbumDetailsFragment

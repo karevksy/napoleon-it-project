@@ -1,6 +1,6 @@
 package com.karevsky.napoleonit.feature.topAlbums.presenter
 
-import com.karevsky.napoleonit.Album
+import com.karevsky.napoleonit.domain.Album
 import com.karevsky.napoleonit.data.FavoriteDao
 import com.karevsky.napoleonit.domain.GetTopAlbumsUseCase
 import com.karevsky.napoleonit.utils.launchWithErrorHandler

@@ -1,4 +1,4 @@
-package com.karevsky.napoleonit.data.entity
+package com.karevsky.napoleonit.data.entities.top
 
 
 import kotlinx.serialization.SerialName

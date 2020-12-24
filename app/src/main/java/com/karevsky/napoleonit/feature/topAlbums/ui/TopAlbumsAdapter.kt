@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.karevsky.napoleonit.Album
 import com.karevsky.napoleonit.R
 import com.karevsky.napoleonit.data.FavoriteDao
+import com.karevsky.napoleonit.domain.Album
 import com.squareup.picasso.Picasso
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.album_item.*
@@ -17,14 +17,13 @@ class TopAlbumsAdapter(
     private val onAlbumClick: (Album) -> Unit,
     private val onSetFavClick: (Album) -> Unit,
     private val favoriteDao: FavoriteDao
-) : ListAdapter<Album, TopAlbumsAdapter.ViewHolder>(object : DiffUtil.ItemCallback<Album>(){
+) : ListAdapter<Album, TopAlbumsAdapter.ViewHolder>(object : DiffUtil.ItemCallback<Album>() {
     override fun areItemsTheSame(oldItem: Album, newItem: Album): Boolean =
         oldItem.id == newItem.id
 
     override fun areContentsTheSame(oldItem: Album, newItem: Album): Boolean =
         oldItem.name == newItem.name
 }) {
-
 
     class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
         LayoutContainer
@@ -47,7 +46,7 @@ class TopAlbumsAdapter(
                 .load(item.imgSource)
                 .into(albumImg)
 
-            containerView.setOnClickListener{
+            containerView.setOnClickListener {
                 onAlbumClick(item)
             }
 

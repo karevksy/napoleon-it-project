@@ -1,6 +1,6 @@
 package com.karevsky.napoleonit.data
 
-import com.karevsky.napoleonit.Album
+import com.karevsky.napoleonit.domain.Album
 
 interface FavoriteDao {
 

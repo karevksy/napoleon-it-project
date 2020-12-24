@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.karevsky.napoleonit.Album
+import com.karevsky.napoleonit.domain.Album
 import com.karevsky.napoleonit.R
 import com.karevsky.napoleonit.data.FavoriteDaoImpl
 import com.karevsky.napoleonit.di.albumApi

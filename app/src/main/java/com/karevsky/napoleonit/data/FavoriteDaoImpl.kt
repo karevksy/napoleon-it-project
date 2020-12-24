@@ -1,7 +1,7 @@
 package com.karevsky.napoleonit.data
 
 import android.content.SharedPreferences
-import com.karevsky.napoleonit.Album
+import com.karevsky.napoleonit.domain.Album
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json

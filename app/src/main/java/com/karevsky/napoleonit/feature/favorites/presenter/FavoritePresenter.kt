@@ -1,7 +1,7 @@
 package com.karevsky.napoleonit.feature.favorites.presenter
 
 import android.content.Context
-import com.karevsky.napoleonit.Album
+import com.karevsky.napoleonit.domain.Album
 import com.karevsky.napoleonit.data.FavoriteDao
 import com.karevsky.napoleonit.data.FavoriteDaoImpl
 import moxy.MvpPresenter

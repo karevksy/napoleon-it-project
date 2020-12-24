@@ -1,4 +1,4 @@
-package com.karevsky.napoleonit
+package com.karevsky.napoleonit.domain
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
@@ -6,4 +6,4 @@ import kotlinx.serialization.Serializable
 
 @Parcelize
 @Serializable
-data class Album(val id : Int, val name: String, val band: String, val imgSource: String) : Parcelable
+data class AlbumDetails(val artist: String, val title: String, val duration: Int) : Parcelable
