@@ -1,49 +1,37 @@
 package com.karevsky.napoleonit.feature.detail.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.karevsky.napoleonit.domain.Album
 import com.karevsky.napoleonit.R
-import com.karevsky.napoleonit.data.FavoriteDaoImpl
-import com.karevsky.napoleonit.di.albumApi
+import com.karevsky.napoleonit.domain.Album
 import com.karevsky.napoleonit.domain.AlbumDetails
-import com.karevsky.napoleonit.domain.GetAlbumByIdUseCase
+
 import com.karevsky.napoleonit.feature.detail.presenter.DetailPresenter
+import com.karevsky.napoleonit.feature.detail.presenter.DetailPresenterFactory
 import com.karevsky.napoleonit.feature.detail.presenter.DetailView
 import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_album_details.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class AlbumDetailsFragment : MvpAppCompatFragment(R.layout.fragment_album_details), DetailView {
 
-    private val presenter: DetailPresenter by moxyPresenter {
-        DetailPresenter(
-            album = arguments?.getParcelable(ALBUM)!!,
-            favoriteDao = FavoriteDaoImpl(
-                requireContext().getSharedPreferences(
-                    "data",
-                    Context.MODE_PRIVATE
-                )
-            ),
-            getAlbumByIdUseCase = GetAlbumByIdUseCase(
-                albumsApi = albumApi,
-                albumId = arguments?.getParcelable<Album>(ALBUM)!!.id
-            )
-        )
-    }
+    @Inject
+    lateinit var detailPresenterFactory: DetailPresenterFactory
 
-    companion object {
-        private const val ALBUM = "ALBUM"
-        fun newInstance(album: Album) =
-            AlbumDetailsFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(ALBUM, album)
-                }
-            }
+    private val args: AlbumDetailsFragmentArgs by navArgs()
+
+    private val presenter: DetailPresenter by moxyPresenter {
+        detailPresenterFactory.create(
+            args.album
+        )
     }
 
     private var tracksAdapter: DetailTracksAdapter? = null
@@ -82,5 +70,13 @@ class AlbumDetailsFragment : MvpAppCompatFragment(R.layout.fragment_album_detail
 
     override fun showLoad(isShow: Boolean) {
         detailsProgress.isVisible = isShow
+    }
+
+    override fun showError() {
+        Toast.makeText(
+            requireContext(),
+            "Error with getting request from Deezer API",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 }

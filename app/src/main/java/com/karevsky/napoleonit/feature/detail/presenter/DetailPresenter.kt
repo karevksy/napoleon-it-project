@@ -1,15 +1,25 @@
 package com.karevsky.napoleonit.feature.detail.presenter
 
-import com.karevsky.napoleonit.domain.Album
+import android.util.Log
 import com.karevsky.napoleonit.data.FavoriteDao
+import com.karevsky.napoleonit.domain.Album
 import com.karevsky.napoleonit.domain.AlbumDetails
 import com.karevsky.napoleonit.domain.GetAlbumByIdUseCase
+import com.karevsky.napoleonit.domain.GetAlbumByIdUseCaseFactory
 import com.karevsky.napoleonit.utils.launchWithErrorHandler
 import moxy.MvpPresenter
 import moxy.MvpView
 import moxy.presenterScope
-import moxy.viewstate.strategy.AddToEndSingleStrategy
-import moxy.viewstate.strategy.StateStrategyType
+import moxy.viewstate.strategy.*
+import javax.inject.Inject
+
+class DetailPresenterFactory @Inject constructor(
+    private val getAlbumByIdUseCaseFactory: GetAlbumByIdUseCaseFactory,
+    private val favoriteDao: FavoriteDao
+) {
+    fun create(album: Album) =
+        DetailPresenter(getAlbumByIdUseCaseFactory.create(album.id), album, favoriteDao)
+}
 
 class DetailPresenter(
     private val getAlbumByIdUseCase: GetAlbumByIdUseCase,
@@ -17,19 +27,26 @@ class DetailPresenter(
     private val favoriteDao: FavoriteDao
 ) : MvpPresenter<DetailView>() {
 
-    private var isInFavorites : Boolean = favoriteDao.isInFavorites(album)
+    private var isInFavorites: Boolean = favoriteDao.isInFavorites(album)
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
+
         viewState.showLoad(isShow = true)
-        presenterScope.launchWithErrorHandler( block = {
+
+        presenterScope.launchWithErrorHandler(block = {
             val details = getAlbumByIdUseCase()
+
             viewState.setIsInFavorites(isInFavorites)
             viewState.setDetails(album, details)
             viewState.showLoad(isShow = false)
+        }, onError = {
+            viewState.showLoad(false)
+            Log.d("Why not?", it.toString())
+            viewState.showError()
         })
     }
 
-    fun onFavClicked(){
+    fun onFavClicked() {
         if (isInFavorites) {
             favoriteDao.remove(album)
         } else {
@@ -59,5 +76,8 @@ interface DetailView : MvpView {
      */
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun showLoad(isShow: Boolean)
+
+    @StateStrategyType(SkipStrategy::class)
+    fun showError()
 
 }

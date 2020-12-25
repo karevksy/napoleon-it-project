@@ -1,60 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".feature.search.ui.SearchFragment">
+
+    <ProgressBar
+        android:id="@+id/genresProgress"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="10sp"
         android:fontFamily="sans-serif-medium"
         android:text="Поиск"
+        android:textColor="@color/black"
         android:textSize="33sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_margin="10sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/etYearFrom"
-        android:layout_width="200sp"
+    <SearchView
+        android:id="@+id/etGenres"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="С какого года"
-        app:layout_constraintTop_toBottomOf="@id/tvSearch"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="10dp"/>
-
-    <EditText
-        android:id="@+id/etYearTo"
-        android:layout_width="200sp"
-        android:layout_height="wrap_content"
-        android:hint="По какой год"
-        app:layout_constraintTop_toBottomOf="@id/etYearFrom"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"/>
-
-    <Spinner
-        android:id="@+id/genreSpinner"
-        android:layout_width="200sp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/etYearTo"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"/>
-
-    <Button
-        android:id="@+id/btnSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/genreSpinner"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="Поиск"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginEnd="10dp"
+        android:hint="Жанр"
+        android:iconifiedByDefault="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSearch" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvGenres"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etGenres" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

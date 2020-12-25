@@ -11,7 +11,7 @@ import com.karevsky.napoleonit.domain.AlbumDetails
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.track_item.*
 
-class DetailTracksAdapter() : ListAdapter<AlbumDetails, DetailTracksAdapter.ViewHolder>(object :
+class DetailTracksAdapter : ListAdapter<AlbumDetails, DetailTracksAdapter.ViewHolder>(object :
     DiffUtil.ItemCallback<AlbumDetails>() {
     override fun areItemsTheSame(oldItem: AlbumDetails, newItem: AlbumDetails): Boolean {
         return oldItem == newItem

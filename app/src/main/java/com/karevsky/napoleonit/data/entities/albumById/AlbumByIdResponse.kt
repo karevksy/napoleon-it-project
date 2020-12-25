@@ -1,4 +1,4 @@
-package com.karevsky.napoleonit.data.entities.albumsById
+package com.karevsky.napoleonit.data.entities.albumById
 
 
 import kotlinx.serialization.SerialName

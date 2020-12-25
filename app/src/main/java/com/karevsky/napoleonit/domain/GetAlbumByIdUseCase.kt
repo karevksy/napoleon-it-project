@@ -3,6 +3,13 @@ package com.karevsky.napoleonit.domain
 import com.karevsky.napoleonit.di.AlbumsApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
+
+class GetAlbumByIdUseCaseFactory @Inject constructor(
+    private val albumsApi: AlbumsApi
+    ) {
+    fun create(albumId: Int) = GetAlbumByIdUseCase(albumId, albumsApi)
+}
 
 class GetAlbumByIdUseCase(
     private val albumId: Int,
