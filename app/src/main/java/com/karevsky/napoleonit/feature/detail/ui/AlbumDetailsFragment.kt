@@ -2,7 +2,9 @@ package com.karevsky.napoleonit.feature.detail.ui
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.karevsky.napoleonit.R
 import com.karevsky.napoleonit.domain.Album
@@ -24,19 +26,11 @@ class AlbumDetailsFragment : MvpAppCompatFragment(R.layout.fragment_album_detail
     @Inject
     lateinit var detailPresenterFactory: DetailPresenterFactory
 
-    companion object {
-        private const val ALBUM = "ALBUM"
-        fun newInstance(album: Album) =
-            AlbumDetailsFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(ALBUM, album)
-                }
-            }
-    }
+    private val args: AlbumDetailsFragmentArgs by navArgs()
 
     private val presenter: DetailPresenter by moxyPresenter {
         detailPresenterFactory.create(
-            arguments?.getParcelable(ALBUM)!!
+            args.album
         )
     }
 
@@ -76,5 +70,13 @@ class AlbumDetailsFragment : MvpAppCompatFragment(R.layout.fragment_album_detail
 
     override fun showLoad(isShow: Boolean) {
         detailsProgress.isVisible = isShow
+    }
+
+    override fun showError() {
+        Toast.makeText(
+            requireContext(),
+            "Error with getting request from Deezer API",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 }

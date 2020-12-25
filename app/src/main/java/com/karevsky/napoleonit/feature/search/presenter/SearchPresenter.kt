@@ -1,5 +1,6 @@
 package com.karevsky.napoleonit.feature.search.presenter
 
+import android.util.Log
 import com.karevsky.napoleonit.domain.Genre
 import com.karevsky.napoleonit.domain.GetGenresUseCase
 import com.karevsky.napoleonit.utils.launchWithErrorHandler
@@ -14,11 +15,15 @@ import javax.inject.Inject
 class SearchPresenter @Inject constructor(
     private val getGenresUseCase: GetGenresUseCase
 ) : MvpPresenter<SearchView>() {
+    private var genres: List<Genre> = listOf()
+    private var tempGenres: MutableList<Genre> = mutableListOf()
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
+        viewState.showLoad(isShow = true)
         presenterScope.launchWithErrorHandler(block = {
-            val genres = getGenresUseCase()
+            genres = getGenresUseCase()
             viewState.setGenres(genres)
+            viewState.showLoad(false)
         }, onError = {
             viewState.showError()
         })
@@ -31,6 +36,7 @@ class SearchPresenter @Inject constructor(
 
 }
 
+
 interface SearchView : MvpView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
@@ -41,6 +47,9 @@ interface SearchView : MvpView {
 
     @StateStrategyType(OneExecutionStateStrategy::class)
     fun openGenreList(genreId: Int, genreTitle: String)
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun showLoad(isShow: Boolean)
 
 
 }

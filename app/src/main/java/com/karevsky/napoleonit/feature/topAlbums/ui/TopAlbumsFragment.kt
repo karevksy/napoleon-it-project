@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.karevsky.napoleonit.R
 import com.karevsky.napoleonit.domain.Album
-import com.karevsky.napoleonit.feature.detail.ui.AlbumDetailsFragment
 import com.karevsky.napoleonit.feature.topAlbums.presenter.TopAlbumsPresenter
 import com.karevsky.napoleonit.feature.topAlbums.presenter.TopAlbumsPresenterFactory
 import com.karevsky.napoleonit.feature.topAlbums.presenter.TopAlbumsView
@@ -20,16 +21,12 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class TopAlbumsFragment : MvpAppCompatFragment(R.layout.fragment_top_albums), TopAlbumsView {
 
-    companion object {
-        private const val GENRE_ID = "GENRE_ID"
-        private const val GENRE_TITLE = "GENRE_TITLE"
-        fun newInstance(genreId: Int, genreTitle: String) =
-            TopAlbumsFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(GENRE_ID, genreId)
-                    putString(GENRE_TITLE, genreTitle)
-                }
-            }
+    private val args: TopAlbumsFragmentArgs by navArgs()
+
+    val presenter: TopAlbumsPresenter by moxyPresenter {
+        topAlbumsPresenterFactory.create(
+            args.genreId
+        )
     }
 
     @Inject
@@ -38,17 +35,6 @@ class TopAlbumsFragment : MvpAppCompatFragment(R.layout.fragment_top_albums), To
     @Inject
     lateinit var topAlbumsAdapterFactory: TopAlbumsAdapterFactory
 
-
-
-    private val presenter: TopAlbumsPresenter by moxyPresenter {
-        topAlbumsPresenterFactory.create(
-            getGenre(arguments?.getInt("GENRE_ID"))
-        )
-    }
-
-    private fun getGenre(genreId: Int?) : Int{
-        return genreId ?: 0
-    }
 
     private var albumsAdapter: TopAlbumsAdapter? = null
 
@@ -80,10 +66,10 @@ class TopAlbumsFragment : MvpAppCompatFragment(R.layout.fragment_top_albums), To
     }
 
     override fun openAlbumDetail(album: Album) {
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.container, AlbumDetailsFragment.newInstance(album))
-            .addToBackStack("Details")
-            .commit()
+        val action =
+            TopAlbumsFragmentDirections.actionTopAlbumsFragmentToAlbumDetailsFragment(album)
+        findNavController().navigate(action)
+
     }
 
     override fun showError() {

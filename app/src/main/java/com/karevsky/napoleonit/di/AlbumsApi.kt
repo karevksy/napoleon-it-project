@@ -1,8 +1,8 @@
 package com.karevsky.napoleonit.di
 
-import com.karevsky.napoleonit.data.entities.top.TopAlbumsResponse
 import com.karevsky.napoleonit.data.entities.albumById.AlbumByIdResponse
 import com.karevsky.napoleonit.data.entities.genre.GenresResponse
+import com.karevsky.napoleonit.data.entities.top.TopAlbumsResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

@@ -1,5 +1,6 @@
 package com.karevsky.napoleonit.feature.detail.presenter
 
+import android.util.Log
 import com.karevsky.napoleonit.data.FavoriteDao
 import com.karevsky.napoleonit.domain.Album
 import com.karevsky.napoleonit.domain.AlbumDetails
@@ -9,8 +10,7 @@ import com.karevsky.napoleonit.utils.launchWithErrorHandler
 import moxy.MvpPresenter
 import moxy.MvpView
 import moxy.presenterScope
-import moxy.viewstate.strategy.AddToEndSingleStrategy
-import moxy.viewstate.strategy.StateStrategyType
+import moxy.viewstate.strategy.*
 import javax.inject.Inject
 
 class DetailPresenterFactory @Inject constructor(
@@ -30,12 +30,19 @@ class DetailPresenter(
     private var isInFavorites: Boolean = favoriteDao.isInFavorites(album)
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
+
         viewState.showLoad(isShow = true)
+
         presenterScope.launchWithErrorHandler(block = {
             val details = getAlbumByIdUseCase()
+
             viewState.setIsInFavorites(isInFavorites)
             viewState.setDetails(album, details)
             viewState.showLoad(isShow = false)
+        }, onError = {
+            viewState.showLoad(false)
+            Log.d("Why not?", it.toString())
+            viewState.showError()
         })
     }
 
@@ -69,5 +76,8 @@ interface DetailView : MvpView {
      */
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun showLoad(isShow: Boolean)
+
+    @StateStrategyType(SkipStrategy::class)
+    fun showError()
 
 }

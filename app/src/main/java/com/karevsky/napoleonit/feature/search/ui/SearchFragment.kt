@@ -1,8 +1,16 @@
 package com.karevsky.napoleonit.feature.search.ui
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.SearchView.OnQueryTextListener
 import android.widget.Toast
+import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.karevsky.napoleonit.R
@@ -24,7 +32,6 @@ class SearchFragment : MvpAppCompatFragment(R.layout.fragment_search), SearchVie
 
     private var searchGenresAdapter: SearchGenresAdapter? = null
 
-
     private val presenter: SearchPresenter by moxyPresenter { searchPresenter }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,10 +49,30 @@ class SearchFragment : MvpAppCompatFragment(R.layout.fragment_search), SearchVie
                 searchGenresAdapter = it
             }
         }
+
+        etGenres.imeOptions = EditorInfo.IME_ACTION_DONE
+        etGenres.setOnQueryTextListener(object : OnQueryTextListener {
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                Log.d("FilteringText", "$newText")
+                searchGenresAdapter?.filter?.filter(newText)
+                return false
+            }
+
+        })
     }
 
     override fun setGenres(genres: List<Genre>) {
-        searchGenresAdapter?.submitList(genres)
+        searchGenresAdapter?.setData(genres)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        searchGenresAdapter = null
     }
 
     override fun showError() {
@@ -57,8 +84,12 @@ class SearchFragment : MvpAppCompatFragment(R.layout.fragment_search), SearchVie
     }
 
     override fun openGenreList(genreId: Int, genreTitle: String) {
-        requireFragmentManager().beginTransaction()
-            .replace(R.id.container, TopAlbumsFragment.newInstance(genreId, genreTitle))
-            .commit()
+        val action = SearchFragmentDirections.actionSearchFragmentToTopAlbumsFragment(genreId)
+        findNavController().navigate(action)
     }
+
+    override fun showLoad(isShow: Boolean) {
+        genresProgress.isVisible = isShow
+    }
+
 }

@@ -3,8 +3,8 @@ package com.karevsky.napoleonit.feature.search.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.karevsky.napoleonit.R
 import com.karevsky.napoleonit.domain.Genre
@@ -14,16 +14,10 @@ import kotlinx.android.synthetic.main.genres_item.*
 
 class SearchGenresAdapter(
     private val onItemClick: (Genre) -> Unit
-) : ListAdapter<Genre, SearchGenresAdapter.ViewHolder>(object :
-    DiffUtil.ItemCallback<Genre>() {
-    override fun areItemsTheSame(oldItem: Genre, newItem: Genre): Boolean {
-        return oldItem == newItem
-    }
+) : RecyclerView.Adapter<SearchGenresAdapter.ViewHolder>(), Filterable {
 
-    override fun areContentsTheSame(oldItem: Genre, newItem: Genre): Boolean {
-        return oldItem.name == newItem.name
-    }
-}) {
+    private val genres: MutableList<Genre> = mutableListOf()
+    private val genresFull: MutableList<Genre> = genres
 
     class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
         LayoutContainer
@@ -34,8 +28,13 @@ class SearchGenresAdapter(
         )
     }
 
+    fun setData(genres: List<Genre>) {
+        this.genres.clear()
+        this.genres.addAll(genres)
+    }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = getItem(position)
+        val item = genres[position]
 
         holder.apply {
             tvGenre.text = item.name
@@ -49,4 +48,36 @@ class SearchGenresAdapter(
         }
     }
 
+    override fun getItemCount(): Int = genres.size
+
+    override fun getFilter(): Filter {
+        return genresFilter
+    }
+
+    private val genresFilter: Filter = object : Filter() {
+        override fun performFiltering(constraint: CharSequence?): FilterResults {
+            val filteredList = mutableListOf<Genre>()
+
+            if (constraint.isNullOrEmpty()) {
+                filteredList.addAll(genresFull)
+            } else {
+                val stringPattern = constraint.toString().toLowerCase().trim()
+
+                for (genre in genresFull) {
+                    if (genre.name.toLowerCase().contains(stringPattern)) {
+                        filteredList.add(genre)
+                    }
+                }
+            }
+            val results = FilterResults()
+            results.values = filteredList
+            return results
+        }
+
+        override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+            genres.clear()
+            genres.addAll(results?.values as List<Genre>)
+            notifyDataSetChanged()
+        }
+    }
 }

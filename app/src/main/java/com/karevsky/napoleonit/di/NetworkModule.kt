@@ -19,7 +19,7 @@ class NetworkModule {
     @Singleton
     fun albumApi(): AlbumsApi = Retrofit.Builder()
         .baseUrl("https://api.deezer.com/")
-        .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
+        .addConverterFactory(Json{ignoreUnknownKeys = true}.asConverterFactory("application/json".toMediaType()))
         .build()
         .create()
 }

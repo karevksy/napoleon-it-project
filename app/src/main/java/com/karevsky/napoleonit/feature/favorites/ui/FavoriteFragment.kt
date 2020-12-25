@@ -2,6 +2,7 @@ package com.karevsky.napoleonit.feature.favorites.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.karevsky.napoleonit.R
 import com.karevsky.napoleonit.domain.Album
@@ -49,8 +50,7 @@ class FavoriteFragment : MvpAppCompatFragment(R.layout.fragment_favorite), Favor
     }
 
     override fun openDetail(album: Album) {
-        requireFragmentManager().beginTransaction()
-            .replace(R.id.container, AlbumDetailsFragment.newInstance(album))
-            .commit()
+        val action = FavoriteFragmentDirections.actionFavoriteFragmentToAlbumDetailsFragment(album)
+        findNavController().navigate(action)
     }
 }
