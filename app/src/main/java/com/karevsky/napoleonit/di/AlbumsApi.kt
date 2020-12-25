@@ -11,7 +11,7 @@ interface AlbumsApi {
 
     @GET("chart/{genre}/albums")
     suspend fun getTopAlbums(
-        @Path("genre") genre: Int = 0,
+        @Path("genre") genre: Int,
         @Query("index") index: Int = 0,
         @Query("limit") limit: Int = 50
     ): TopAlbumsResponse

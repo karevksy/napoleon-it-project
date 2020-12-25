@@ -1,60 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".feature.search.ui.SearchFragment">
 
     <TextView
         android:id="@+id/tvSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="10sp"
         android:fontFamily="sans-serif-medium"
         android:text="Поиск"
+        android:textColor="@color/black"
         android:textSize="33sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_margin="10sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/etYearFrom"
-        android:layout_width="200sp"
+        android:id="@+id/etGenres"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="С какого года"
-        app:layout_constraintTop_toBottomOf="@id/tvSearch"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:hint="Жанр"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="10dp"/>
+        app:layout_constraintTop_toBottomOf="@id/tvSearch" />
 
-    <EditText
-        android:id="@+id/etYearTo"
-        android:layout_width="200sp"
-        android:layout_height="wrap_content"
-        android:hint="По какой год"
-        app:layout_constraintTop_toBottomOf="@id/etYearFrom"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvGenres"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline3"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"/>
+        app:layout_constraintTop_toBottomOf="@id/etGenres" />
 
-    <Spinner
-        android:id="@+id/genreSpinner"
-        android:layout_width="200sp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/etYearTo"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"/>
-
-    <Button
-        android:id="@+id/btnSearch"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/genreSpinner"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="Поиск"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"/>
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="55dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
