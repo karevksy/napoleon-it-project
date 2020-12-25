@@ -1,4 +1,4 @@
-package com.karevsky.napoleonit.feature.topAlbums.ui
+package com.karevsky.napoleonit.feature.favorites.ui
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,28 +6,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.karevsky.napoleonit.R
-import com.karevsky.napoleonit.data.FavoriteDao
 import com.karevsky.napoleonit.domain.Album
+import com.karevsky.napoleonit.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.album_item.*
-import javax.inject.Inject
 
-class TopAlbumsAdapterFactory @Inject constructor(
-    private val favoriteDao: FavoriteDao
-) {
-    fun create(
-        onAlbumClick: (Album) -> Unit,
-        onSetFavClick: (Album) -> Unit
-    ) = TopAlbumsAdapter(onAlbumClick, onSetFavClick, favoriteDao)
-}
-
-class TopAlbumsAdapter(
+class FavoriteAdapter(
     private val onAlbumClick: (Album) -> Unit,
-    private val onSetFavClick: (Album) -> Unit,
-    private val favoriteDao: FavoriteDao
-) : ListAdapter<Album, TopAlbumsAdapter.ViewHolder>(object : DiffUtil.ItemCallback<Album>() {
+    private val onRemoveClick: (Album) -> Unit
+) : ListAdapter<Album, FavoriteAdapter.ViewHolder>(object : DiffUtil.ItemCallback<Album>() {
     override fun areItemsTheSame(oldItem: Album, newItem: Album): Boolean =
         oldItem.id == newItem.id
 
@@ -50,31 +38,15 @@ class TopAlbumsAdapter(
         holder.apply {
             tvAlbumName.text = item.name
             tvArtistName.text = item.band
-            setImg(item, this)
-
-            Picasso.get()
-                .load(item.imgSource)
-                .into(albumImg)
+            Picasso.get().load(item.imgSource).into(albumImg)
 
             containerView.setOnClickListener {
                 onAlbumClick(item)
             }
 
             imgSetFav.setOnClickListener {
-                onSetFavClick(item)
-                setImg(item, this)
+                onRemoveClick(item)
             }
         }
-
-    }
-
-    /**
-     * Устанавливает картинку для [imgSetFav] в зависимости от того,
-     * находится ли [item] в избранном
-     */
-    private fun setImg(item: Album, holder: ViewHolder) {
-        if (favoriteDao.isInFavorites(item)) {
-            holder.imgSetFav.setImageResource(R.drawable.ic_fav_on)
-        } else holder.imgSetFav.setImageResource(R.drawable.ic_fav_off)
     }
 }

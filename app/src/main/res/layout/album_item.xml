@@ -12,16 +12,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/albumImg"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:src="@mipmap/album_test"
+            android:layout_marginStart="10dp"/>
+
         <TextView
             android:id="@+id/tvAlbumName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:fontFamily="sans-serif-medium"
             android:textColor="@color/black"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imgSetFav"
+            app:layout_constraintStart_toEndOf="@+id/albumImg"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Название альбома" />
 
@@ -29,39 +40,35 @@
             android:id="@+id/tvArtistName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="10dp"
             android:layout_marginBottom="10dp"
             android:fontFamily="sans-serif"
             android:textColor="@color/black"
             android:textSize="13sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/albumImg"
             app:layout_constraintTop_toBottomOf="@id/tvAlbumName"
             tools:text="Название группы" />
 
-        <TextView
-            android:id="@+id/tvSongAmount"
+        <ImageView
+            android:id="@+id/tvDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16sp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="sans-serif"
-            android:textSize="13sp"
+            android:layout_marginStart="8sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/albumImg"
             app:layout_constraintTop_toBottomOf="@id/tvArtistName"
-            tools:text="12 треков" />
+            android:src="@drawable/ic_about"/>
 
         <ImageView
             android:id="@+id/imgSetFav"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_width="40dp"
+            android:layout_height="0dp"
+            android:paddingEnd="10dp"
+            android:contentDescription="Set album to favorites"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/set_fav_ic"
-            android:contentDescription="Set album to favorites" />
+            app:srcCompat="@drawable/ic_delete_fav" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
