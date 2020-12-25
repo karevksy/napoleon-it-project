@@ -1,21 +1,26 @@
 package com.karevsky.napoleonit.di
 
 import com.karevsky.napoleonit.data.entities.top.TopAlbumsResponse
-import com.karevsky.napoleonit.data.entities.albumsById.AlbumByIdResponse
+import com.karevsky.napoleonit.data.entities.albumById.AlbumByIdResponse
+import com.karevsky.napoleonit.data.entities.genre.GenresResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface  AlbumsApi {
+interface AlbumsApi {
 
-    @GET("chart/0/albums")
+    @GET("chart/{genre}/albums")
     suspend fun getTopAlbums(
+        @Path("genre") genre: Int = 0,
         @Query("index") index: Int = 0,
         @Query("limit") limit: Int = 50
-    ) : TopAlbumsResponse
+    ): TopAlbumsResponse
 
     @GET("album/{albumId}/tracks")
     suspend fun getAlbumById(
         @Path("albumId") albumId: Int
-    ) : AlbumByIdResponse
+    ): AlbumByIdResponse
+
+    @GET("genre")
+    suspend fun getGenres(): GenresResponse
 }

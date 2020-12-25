@@ -1,6 +1,7 @@
 package com.karevsky.napoleonit.feature.favorites.presenter
 
 import android.content.Context
+import android.util.Log
 import com.karevsky.napoleonit.domain.Album
 import com.karevsky.napoleonit.data.FavoriteDao
 import com.karevsky.napoleonit.data.FavoriteDaoImpl
@@ -9,18 +10,19 @@ import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.OneExecutionStateStrategy
 import moxy.viewstate.strategy.StateStrategyType
+import javax.inject.Inject
 
-class FavoritePresenter(
+class FavoritePresenter @Inject constructor(
     private val favoriteDao: FavoriteDao
 ) : MvpPresenter<FavoriteView>() {
+
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.setAlbums()
     }
 
-    fun getDao(context: Context): FavoriteDao =
-        FavoriteDaoImpl(context.getSharedPreferences("data", Context.MODE_PRIVATE))
+    fun getDao(): FavoriteDao = favoriteDao
 
     fun onAlbumClick(album: Album) {
         viewState.openDetail(album)

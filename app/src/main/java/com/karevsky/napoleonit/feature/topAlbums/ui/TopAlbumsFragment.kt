@@ -28,6 +28,7 @@ class TopAlbumsFragment : MvpAppCompatFragment(R.layout.fragment_top_albums), To
     lateinit var topAlbumsAdapterFactory: TopAlbumsAdapterFactory
 
     private val presenter: TopAlbumsPresenter by moxyPresenter { topAlbumsPresenter }
+
     private var albumsAdapter: TopAlbumsAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
