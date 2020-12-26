@@ -1,20 +1,18 @@
 <resources>
-    <string name="app_name">NapoleonIT</string>
-
-    <!--Test genres-->
-    <string-array name="genres_array">
-        <item>Все</item>
-        <item>Рок</item>
-        <item>Инди</item>
-        <item>Хип-хоп</item>
-        <item>Альтернативный рок</item>
-        <item>Пост-хардкор</item>
-        <item>Электроника</item>
-        <item>Техно</item>
-    </string-array>
+    <string name="app_name">Playlist</string>
 
     <!--Menu Buttons -->
     <string name="MenuTop">Топ</string>
     <string name="MenuFav">Избранное</string>
     <string name="MenuSearch">Поиск</string>
+
+    <!--All others-->
+    <string name="top_albums">Топ альбомов</string>
+    <string name="set_album_to_favorites">Set album to favorites</string>
+    <string name="album_image">Album Image</string>
+    <string name="playlist">Плейлист</string>
+    <string name="about">Об альбоме:</string>
+    <string name="search">Поиск</string>
+    <string name="genre">Жанр</string>
+    <string name="track">Трек</string>
 </resources>

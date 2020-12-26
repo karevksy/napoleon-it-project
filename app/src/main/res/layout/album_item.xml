@@ -19,8 +19,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            tools:src="@mipmap/album_test"
-            android:layout_marginStart="10dp"/>
+            tools:src="@mipmap/ic_launcher"
+            android:layout_marginStart="10dp"
+            android:contentDescription="@string/album_image" />
 
         <TextView
             android:id="@+id/tvAlbumName"
@@ -64,7 +65,7 @@
             android:layout_width="40dp"
             android:layout_height="0dp"
             android:paddingEnd="10dp"
-            android:contentDescription="Set album to favorites"
+            android:contentDescription="@string/set_album_to_favorites"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
