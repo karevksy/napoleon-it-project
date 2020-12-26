@@ -1,14 +1,11 @@
 package com.karevsky.napoleonit.feature.favorites.presenter
 
-import android.content.Context
-import android.util.Log
 import com.karevsky.napoleonit.domain.Album
-import com.karevsky.napoleonit.data.FavoriteDao
-import com.karevsky.napoleonit.data.FavoriteDaoImpl
+import com.karevsky.napoleonit.data.dao.favorite.FavoriteDao
 import moxy.MvpPresenter
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
-import moxy.viewstate.strategy.OneExecutionStateStrategy
+import moxy.viewstate.strategy.SkipStrategy
 import moxy.viewstate.strategy.StateStrategyType
 import javax.inject.Inject
 
@@ -28,6 +25,10 @@ class FavoritePresenter @Inject constructor(
         viewState.openDetail(album)
     }
 
+    fun showFavoriteTextView() {
+        viewState.showFavoriteTextView(favoriteDao.getAll().isNotEmpty())
+    }
+
     fun onRemoveClick(album: Album) {
         favoriteDao.remove(album)
         viewState.setAlbums()
@@ -45,7 +46,13 @@ interface FavoriteView : MvpView {
     /**
      * Открывает фрагмент с описанием [album]
      */
-    @StateStrategyType(OneExecutionStateStrategy::class)
+    @StateStrategyType(SkipStrategy::class)
     fun openDetail(album: Album)
+
+    /**
+     * Отображает ошибку, если не удалось получить данные с API
+     */
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun showFavoriteTextView(isFavoritesNull: Boolean)
 
 }

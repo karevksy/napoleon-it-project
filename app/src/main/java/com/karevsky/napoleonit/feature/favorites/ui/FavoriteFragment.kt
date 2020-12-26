@@ -2,11 +2,11 @@ package com.karevsky.napoleonit.feature.favorites.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isInvisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.karevsky.napoleonit.R
 import com.karevsky.napoleonit.domain.Album
-import com.karevsky.napoleonit.feature.detail.ui.AlbumDetailsFragment
 import com.karevsky.napoleonit.feature.favorites.presenter.FavoritePresenter
 import com.karevsky.napoleonit.feature.favorites.presenter.FavoriteView
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,10 +47,15 @@ class FavoriteFragment : MvpAppCompatFragment(R.layout.fragment_favorite), Favor
 
     override fun setAlbums() {
         albumsAdapter?.submitList(presenter.getDao().getAll())
+        presenter.showFavoriteTextView()
     }
 
     override fun openDetail(album: Album) {
         val action = FavoriteFragmentDirections.actionFavoriteFragmentToAlbumDetailsFragment(album)
         findNavController().navigate(action)
+    }
+
+    override fun showFavoriteTextView(isFavoritesNull: Boolean) {
+        tvIsFavoritesNull.isInvisible = isFavoritesNull
     }
 }

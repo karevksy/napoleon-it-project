@@ -1,15 +1,11 @@
 package com.karevsky.napoleonit.feature.search.ui
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.SearchView.OnQueryTextListener
 import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +13,6 @@ import com.karevsky.napoleonit.R
 import com.karevsky.napoleonit.domain.Genre
 import com.karevsky.napoleonit.feature.search.presenter.SearchPresenter
 import com.karevsky.napoleonit.feature.search.presenter.SearchView
-import com.karevsky.napoleonit.feature.topAlbums.ui.TopAlbumsFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_search.*
 import moxy.MvpAppCompatFragment
@@ -37,6 +32,19 @@ class SearchFragment : MvpAppCompatFragment(R.layout.fragment_search), SearchVie
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        etGenres.imeOptions = EditorInfo.IME_ACTION_DONE
+        etGenres.setOnQueryTextListener(object : OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                searchGenresAdapter?.filter(newText)
+                return true
+            }
+        })
+
         with(rvGenres) {
             layoutManager =
                 GridLayoutManager(context, 3, LinearLayoutManager.VERTICAL, false)
@@ -50,24 +58,11 @@ class SearchFragment : MvpAppCompatFragment(R.layout.fragment_search), SearchVie
             }
         }
 
-        etGenres.imeOptions = EditorInfo.IME_ACTION_DONE
-        etGenres.setOnQueryTextListener(object : OnQueryTextListener {
 
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                Log.d("FilteringText", "$newText")
-                searchGenresAdapter?.filter?.filter(newText)
-                return false
-            }
-
-        })
     }
 
     override fun setGenres(genres: List<Genre>) {
-        searchGenresAdapter?.setData(genres)
+        searchGenresAdapter?.modifyList(genres)
     }
 
     override fun onDestroy() {

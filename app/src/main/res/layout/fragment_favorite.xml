@@ -7,6 +7,18 @@
     tools:context=".feature.favorites.ui.FavoriteFragment">
 
     <TextView
+        android:id="@+id/tvIsFavoritesNull"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:text="Вы еще ничего не добавили в избранное :("
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvFav" />
+
+    <TextView
         android:id="@+id/tvFav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

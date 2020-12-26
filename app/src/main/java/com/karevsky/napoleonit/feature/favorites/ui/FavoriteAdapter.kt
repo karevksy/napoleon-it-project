@@ -17,10 +17,10 @@ class FavoriteAdapter(
     private val onRemoveClick: (Album) -> Unit
 ) : ListAdapter<Album, FavoriteAdapter.ViewHolder>(object : DiffUtil.ItemCallback<Album>() {
     override fun areItemsTheSame(oldItem: Album, newItem: Album): Boolean =
-        oldItem.id == newItem.id
+        oldItem.name == newItem.name
 
     override fun areContentsTheSame(oldItem: Album, newItem: Album): Boolean =
-        oldItem.name == newItem.name
+        oldItem.id == newItem.id
 }) {
 
     class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),

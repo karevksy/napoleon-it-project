@@ -16,7 +16,9 @@
             app:enterAnim="@anim/slide_in_top"
             app:exitAnim="@anim/slide_out_bottom"
             app:popEnterAnim="@anim/slide_in_bottom"
-            app:popExitAnim="@anim/slide_out_top" />
+            app:popExitAnim="@anim/slide_out_top"
+            app:popUpTo="@id/topAlbumsFragment"
+            app:popUpToInclusive="false" />
         <argument
             android:name="genreId"
             android:defaultValue="0"
@@ -30,10 +32,10 @@
         <action
             android:id="@+id/action_searchFragment_to_topAlbumsFragment"
             app:destination="@id/topAlbumsFragment"
-            app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
             app:popUpToInclusive="false">
             <argument
                 android:name="genreId"
@@ -61,11 +63,6 @@
         <argument
             android:name="album"
             app:argType="com.karevsky.napoleonit.domain.Album" />
-        <action
-            android:id="@+id/action_albumDetailsFragment_to_topAlbumsFragment"
-            app:destination="@id/topAlbumsFragment"
-            app:popUpTo="@id/topAlbumsFragment"
-            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_albumDetailsFragment_to_favoriteFragment2"
             app:destination="@id/favoriteFragment"

@@ -1,6 +1,7 @@
-package com.karevsky.napoleonit.data
+package com.karevsky.napoleonit.data.dao.favorite
 
 import android.content.SharedPreferences
+import com.karevsky.napoleonit.data.dao.genres.GenreDao
 import com.karevsky.napoleonit.domain.Album
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString

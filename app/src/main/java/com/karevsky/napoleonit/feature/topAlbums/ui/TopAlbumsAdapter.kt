@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.karevsky.napoleonit.R
-import com.karevsky.napoleonit.data.FavoriteDao
+import com.karevsky.napoleonit.data.dao.favorite.FavoriteDao
 import com.karevsky.napoleonit.domain.Album
 import com.squareup.picasso.Picasso
 import kotlinx.android.extensions.LayoutContainer
@@ -29,10 +29,11 @@ class TopAlbumsAdapter(
     private val favoriteDao: FavoriteDao
 ) : ListAdapter<Album, TopAlbumsAdapter.ViewHolder>(object : DiffUtil.ItemCallback<Album>() {
     override fun areItemsTheSame(oldItem: Album, newItem: Album): Boolean =
-        oldItem.id == newItem.id
-
-    override fun areContentsTheSame(oldItem: Album, newItem: Album): Boolean =
         oldItem.name == newItem.name
+
+    //Указываю id, из-за того, что при запросе с API одинаковые альбомы имеют разные ссылки
+    override fun areContentsTheSame(oldItem: Album, newItem: Album): Boolean =
+        oldItem.id == newItem.id
 }) {
 
     class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),

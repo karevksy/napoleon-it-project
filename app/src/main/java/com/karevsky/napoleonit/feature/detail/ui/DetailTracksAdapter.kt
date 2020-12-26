@@ -37,8 +37,22 @@ class DetailTracksAdapter : ListAdapter<AlbumDetails, DetailTracksAdapter.ViewHo
         holder.apply {
             tvTrackName.text = item.title
             tvTrackArtist.text = item.artist
-            tvTrackDuration.text = item.duration.toString()
+            tvTrackDuration.text = secondsToDuration(item.duration)
 
+        }
+    }
+
+    //ужас какой, не смотрите сюда
+    /**
+     * @return строку с корректным отображением продолжительности трека
+     */
+    private fun secondsToDuration(seconds: Int): String {
+        val minutes: Int = seconds / 60
+        val newSeconds = seconds % 60
+        return if (newSeconds < 10) {
+            ("$minutes:0$newSeconds")
+        } else {
+            "$minutes:$newSeconds"
         }
     }
 }

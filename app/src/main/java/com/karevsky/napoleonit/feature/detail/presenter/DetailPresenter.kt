@@ -1,7 +1,7 @@
 package com.karevsky.napoleonit.feature.detail.presenter
 
 import android.util.Log
-import com.karevsky.napoleonit.data.FavoriteDao
+import com.karevsky.napoleonit.data.dao.favorite.FavoriteDao
 import com.karevsky.napoleonit.domain.Album
 import com.karevsky.napoleonit.domain.AlbumDetails
 import com.karevsky.napoleonit.domain.GetAlbumByIdUseCase
@@ -77,6 +77,9 @@ interface DetailView : MvpView {
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun showLoad(isShow: Boolean)
 
+    /**
+     * Отображает загрузку списка, в зависимости от [isShow]
+     */
     @StateStrategyType(SkipStrategy::class)
     fun showError()
 

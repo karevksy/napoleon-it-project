@@ -1,6 +1,6 @@
 package com.karevsky.napoleonit.feature.topAlbums.presenter
 
-import com.karevsky.napoleonit.data.FavoriteDao
+import com.karevsky.napoleonit.data.dao.favorite.FavoriteDao
 import com.karevsky.napoleonit.domain.Album
 import com.karevsky.napoleonit.domain.GetTopAlbumsUseCase
 import com.karevsky.napoleonit.domain.GetTopAlbumsUseCaseFactory
@@ -18,14 +18,14 @@ class TopAlbumsPresenterFactory @Inject constructor(
     private val getTopAlbumsUseCaseFactory: GetTopAlbumsUseCaseFactory,
     private val favoriteDao: FavoriteDao
 ) {
-    fun create(genreId: Int = 0) = TopAlbumsPresenter(getTopAlbumsUseCaseFactory.create(genreId), favoriteDao)
+    fun create(genreId: Int = 0) =
+        TopAlbumsPresenter(getTopAlbumsUseCaseFactory.create(genreId), favoriteDao)
 }
 
 class TopAlbumsPresenter(
     private val getTopAlbumsUseCase: GetTopAlbumsUseCase,
     private val favoriteDao: FavoriteDao,
 ) : MvpPresenter<TopAlbumsView>() {
-
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -35,6 +35,7 @@ class TopAlbumsPresenter(
             viewState.setAlbums(albums)
             viewState.showLoading(isShow = false)
         }, onError = {
+            viewState.showLoading(false)
             viewState.showError()
         })
     }
@@ -66,9 +67,15 @@ interface TopAlbumsView : MvpView {
     @StateStrategyType(OneExecutionStateStrategy::class)
     fun openAlbumDetail(album: Album)
 
+    /**
+     * Отображает ошибку, если не удалось получить данные с API
+     */
     @StateStrategyType(SkipStrategy::class)
     fun showError()
 
+    /**
+     * Отображает загрузку списка, в зависимости от [isShow]
+     */
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun showLoading(isShow: Boolean)
 
