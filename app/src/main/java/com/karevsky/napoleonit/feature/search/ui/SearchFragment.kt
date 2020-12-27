@@ -40,7 +40,7 @@ class SearchFragment : MvpAppCompatFragment(R.layout.fragment_search), SearchVie
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 searchGenresAdapter?.filter(newText)
-                return true
+                return false
             }
         })
 
