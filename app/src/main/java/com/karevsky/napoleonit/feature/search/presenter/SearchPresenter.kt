@@ -1,7 +1,6 @@
 package com.karevsky.napoleonit.feature.search.presenter
 
 import com.karevsky.napoleonit.data.dao.genres.GenreDao
-import com.karevsky.napoleonit.data.dao.genres.GenresDaoImpl
 import com.karevsky.napoleonit.domain.Genre
 import com.karevsky.napoleonit.domain.GetGenresUseCase
 import com.karevsky.napoleonit.utils.launchWithErrorHandler
@@ -22,8 +21,8 @@ class SearchPresenter @Inject constructor(
         super.onFirstViewAttach()
         viewState.showLoad(isShow = true)
         presenterScope.launchWithErrorHandler(block = {
-            val genres = getGenresUseCase()
             if(genreDao.getAll().isEmpty()){
+                val genres = getGenresUseCase()
                 for(genre in genres){
                     genreDao.add(genre)
                 }

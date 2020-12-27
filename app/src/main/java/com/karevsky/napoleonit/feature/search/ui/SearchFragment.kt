@@ -32,7 +32,6 @@ class SearchFragment : MvpAppCompatFragment(R.layout.fragment_search), SearchVie
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         etGenres.imeOptions = EditorInfo.IME_ACTION_DONE
         etGenres.setOnQueryTextListener(object : OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
