@@ -1,6 +1,5 @@
 package com.karevsky.napoleonit.data.dao.genres
 
-import com.karevsky.napoleonit.domain.Album
 import com.karevsky.napoleonit.domain.Genre
 
 interface GenreDao {
@@ -16,7 +15,7 @@ interface GenreDao {
     fun remove(genre: Genre)
 
     /**
-     * @return Список всех альбомов
+     * @return Список всех жанров
      */
     fun getAll() : List<Genre>
 }
