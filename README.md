@@ -14,6 +14,7 @@
 * Retrofit 2
 * Moxy
 * Picasso
+
 А так же: 
 * Navigation Components
 * Kotlin Coroutines
